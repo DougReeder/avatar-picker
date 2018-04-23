@@ -5,6 +5,8 @@ function Avatar(props) {
     let classes = ["avatar"];
     if (props.isSelected) {
         classes.push("selected");
+    } else if (props.isSpinning) {
+        classes.push("spinner");
     }
     let avatarStyle = {"backgroundImage": 'url(' + props.pic + ')'};
     return (

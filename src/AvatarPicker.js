@@ -14,6 +14,7 @@ class AvatarPicker extends Component {
         this.state = {
             currentId: props.initialId,
             pickerDisplayed: false,
+            spinnerId: null
         };
         // console.log("constructing AvatarPicker", props, this.state);
     }
@@ -31,9 +32,14 @@ class AvatarPicker extends Component {
 
     clickSelect(avatarId) {
         console.log("clickSelect", avatarId);
+        if (avatarId === this.state.currentId) {
+            this.setState({pickerDisplayed: false});
+            return;
+        }
+        this.setState({spinnerId: avatarId});
         fakeFetch("https://example.com/api/foo").then((response) => {
             // console.log("fetch response:", response);
-            this.setState({currentId: avatarId, pickerDisplayed: false})
+            this.setState({currentId: avatarId, pickerDisplayed: false, spinnerId: null})
         })
     }
 
@@ -44,7 +50,10 @@ class AvatarPicker extends Component {
         let picker;
         if (this.state.pickerDisplayed) {
             let avatars = this.props.avatars.map((avatar) => {
-                return <Avatar key={avatar.src} pic={avatar.src} isSelected={avatar.id === this.state.currentId} onClick={() => this.clickSelect(avatar.id)}/>;
+                return <Avatar key={avatar.src} pic={avatar.src}
+                               isSelected={avatar.id === this.state.currentId}
+                               isSpinning={avatar.id === this.state.spinnerId}
+                               onClick={() => this.clickSelect(avatar.id)}/>;
             });
             picker = (
                 <div className="picker">

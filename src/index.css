@@ -36,8 +36,19 @@ body {
   background-position: center center;
   background-size: contain;
   border-radius: 33px;
+  border-style: hidden;
 }
 
 .avatar.selected {
   border: solid 3px cornflowerblue;
+}
+
+.avatar.spinner {
+  border: dashed 3px cornflowerblue;
+  animation: colorChange 0.25s infinite alternate;
+}
+
+@keyframes colorChange {
+  from { border-color: cornflowerblue;}
+  to { border-color: #fff;}
 }
