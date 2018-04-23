@@ -5,7 +5,7 @@ body {
 }
 
 .picker {
-  width: 350px;
+  width: 320px;
   border-radius: 15px;
   background-color: #444444;
   padding: 15px;
@@ -30,8 +30,14 @@ body {
 }
 
 .avatar {
-  width: 100%;
-  height: 100%;
+  width: 60px;
+  height: 60px;
+  margin: 10px;
   background-position: center center;
   background-size: contain;
+  border-radius: 33px;
+}
+
+.avatar.selected {
+  border: solid 3px cornflowerblue;
 }

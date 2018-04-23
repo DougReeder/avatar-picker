@@ -44,7 +44,7 @@ class AvatarPicker extends Component {
         let picker;
         if (this.state.pickerDisplayed) {
             let avatars = this.props.avatars.map((avatar) => {
-                return <Avatar key={avatar.src} pic={avatar.src} onClick={() => this.clickSelect(avatar.id)}/>;
+                return <Avatar key={avatar.src} pic={avatar.src} isSelected={avatar.id === this.state.currentId} onClick={() => this.clickSelect(avatar.id)}/>;
             });
             picker = (
                 <div className="picker">
@@ -77,7 +77,7 @@ class AvatarPicker extends Component {
         return (
             <div>
                 <div className="centeredBoxes">
-                    <Avatar pic={currentAvatar.src} onClick={() => this.clickCurrent()}/>
+                    <Avatar pic={currentAvatar.src} isSelected={true} onClick={() => this.clickCurrent()}/>
                 </div>
 
                 {picker}
