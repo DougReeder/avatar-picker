@@ -13,6 +13,7 @@ class AvatarPicker extends Component {
         super(props);
         this.state = {
             currentId: props.initialId,
+            isCurrentActive: false,
             pickerDisplayed: false,
             spinnerId: null
         };
@@ -27,7 +28,7 @@ class AvatarPicker extends Component {
 
     clickCurrent() {
         console.log("clickCurrent", !this.state.pickerDisplayed);
-        this.setState({pickerDisplayed: !this.state.pickerDisplayed})
+        this.setState({isCurrentActive: !this.state.pickerDisplayed, pickerDisplayed: !this.state.pickerDisplayed})
     }
 
     clickSelect(avatarId) {
@@ -36,7 +37,7 @@ class AvatarPicker extends Component {
             this.setState({pickerDisplayed: false});
             return;
         }
-        this.setState({spinnerId: avatarId});
+        this.setState({isCurrentActive: false, spinnerId: avatarId});
         fakeFetch("https://example.com/api/foo").then((response) => {
             // console.log("fetch response:", response);
             this.setState({currentId: avatarId, pickerDisplayed: false, spinnerId: null})
@@ -71,7 +72,7 @@ class AvatarPicker extends Component {
         return (
             <div>
                 <div className="centeredBoxes">
-                    <Avatar pic={currentAvatar.src} isSelected={true} onClick={() => this.clickCurrent()}/>
+                    <Avatar pic={currentAvatar.src} isActive={this.state.isCurrentActive} onClick={() => this.clickCurrent()}/>
                 </div>
 
                 {picker}

@@ -45,7 +45,11 @@ body {
   background-position: center center;
   background-size: contain;
   border-radius: 33px;
-  border-style: hidden;
+  border: solid 1px transparent;
+}
+
+.avatar:hover, .avatar.active {
+  border: solid 1px lightgray;
 }
 
 .avatar.selected {
