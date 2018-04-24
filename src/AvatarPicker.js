@@ -26,22 +26,33 @@ class AvatarPicker extends Component {
         });
     }
 
-    clickCurrent() {
-        console.log("clickCurrent", !this.state.pickerDisplayed);
-        this.setState({isCurrentActive: !this.state.pickerDisplayed, pickerDisplayed: !this.state.pickerDisplayed})
+    clickOutside(evt) {
+        // console.log("clickOutside", evt);
+        this.setState({isCurrentActive: false, pickerDisplayed: false});
     }
 
-    clickSelect(avatarId) {
+    clickPopup(evt) {
+        evt.stopPropagation();
+    }
+
+    clickCurrent(evt) {
+        // console.log("clickCurrent", evt, !this.state.pickerDisplayed);
+        this.setState({isCurrentActive: !this.state.pickerDisplayed, pickerDisplayed: !this.state.pickerDisplayed});
+        evt.stopPropagation();
+    }
+
+    clickSelect(avatarId, evt) {
         console.log("clickSelect", avatarId);
+        evt.stopPropagation();
         if (avatarId === this.state.currentId) {
-            this.setState({pickerDisplayed: false});
+            this.setState({isCurrentActive: false, pickerDisplayed: false});
             return;
         }
         this.setState({isCurrentActive: false, spinnerId: avatarId});
         fakeFetch("https://example.com/api/foo").then((response) => {
             // console.log("fetch response:", response);
             this.setState({currentId: avatarId, pickerDisplayed: false, spinnerId: null})
-        })
+        });
     }
 
     render() {
@@ -56,10 +67,10 @@ class AvatarPicker extends Component {
             return <Avatar key={avatar.src} pic={avatar.src}
                            isSelected={avatar.id === this.state.currentId}
                            isSpinning={avatar.id === this.state.spinnerId}
-                           onClick={() => this.clickSelect(avatar.id)}/>;
+                           onClick={(evt) => this.clickSelect(avatar.id, evt)}/>;
         });
         let picker = (
-            <div className={pickerClasses.join(' ')}>
+            <div className={pickerClasses.join(' ')} onClick={(evt) => this.clickPopup(evt)}>
                 <div className="centeredBoxes" style={{color:"white"}}>
                     Choose your avatar
                 </div>
@@ -70,9 +81,9 @@ class AvatarPicker extends Component {
         );
 
         return (
-            <div>
+            <div onClick={(evt) => this.clickOutside(evt)}>
                 <div className="centeredBoxes">
-                    <Avatar pic={currentAvatar.src} isActive={this.state.isCurrentActive} onClick={() => this.clickCurrent()}/>
+                    <Avatar pic={currentAvatar.src} isActive={this.state.isCurrentActive} onClick={(evt) => this.clickCurrent(evt)}/>
                 </div>
 
                 {picker}
