@@ -13,6 +13,7 @@ function Avatar(props) {
     let avatarStyle = {"backgroundImage": 'url(' + props.pic + ')'};
     return (
         <div className="avatarCell" onClick={props.onClick}>
+            // TODO: add another div behind pic, for a proper spinner
             <div className={classes.join(' ')} style={avatarStyle}></div>
         </div>
     );
