@@ -52,6 +52,14 @@ body {
   border: solid 1px lightgray;
 }
 
+.picker .avatar{
+  border: solid 3px transparent;
+}
+
+.picker .avatar:hover {
+  border: solid 3px gray;
+}
+
 .avatar.selected {
   border: solid 3px cornflowerblue;
 }
