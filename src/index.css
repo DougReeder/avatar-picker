@@ -5,10 +5,19 @@ body {
 }
 
 .picker {
+  opacity: 1;
+  scale: 1;
+  transition: all 0.25s cubic-bezier(.44,.76,.65,1.29);
   width: 320px;
   border-radius: 15px;
   background-color: #444444;
   padding: 15px;
+}
+
+.picker.hidden {
+  opacity: 0;
+  scale: 0.75;
+  transition: all 0.25s ;
 }
 
 .centeredBoxes {

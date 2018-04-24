@@ -47,42 +47,27 @@ class AvatarPicker extends Component {
         let currentAvatar = this.findAvatarById(this.state.currentId);
         // console.log("currentAvatar:", currentAvatar);
 
-        let picker;
-        if (this.state.pickerDisplayed) {
-            let avatars = this.props.avatars.map((avatar) => {
-                return <Avatar key={avatar.src} pic={avatar.src}
-                               isSelected={avatar.id === this.state.currentId}
-                               isSpinning={avatar.id === this.state.spinnerId}
-                               onClick={() => this.clickSelect(avatar.id)}/>;
-            });
-            picker = (
-                <div className="picker">
-                    <div className="centeredBoxes" style={{color:"white"}}>
-                        Choose your avatar
-                    </div>
-                    <div className="wrappedBoxes">
-                    {avatars}
-                    </div>
-                </div>
-            );
-            // let rows = [<div key="ABC">Choose your avatar</div>];
-            // for (let i=0; i<this.props.avatars.length % 4; ++i) {
-            //     let cells = [];
-            //     for (let j=0; j<4; ++j) {
-            //         let avatar = this.props.avatars[i*4+j];
-            //         if (avatar) {
-            //             cells.push(<Avatar key={avatar.src} pic={avatar.src}/>)
-            //         } else {
-            //             cells.push(<div class="avatarCell"/>)
-            //         }
-            //     }
-            //     rows.push(
-            //         <div key={i}>
-            //             {cells}
-            //         </div>
-            //     )
-            // }
+        let pickerClasses = ['picker'];
+        if (!this.state.pickerDisplayed) {
+            pickerClasses.push('hidden');
         }
+        let avatars = this.props.avatars.map((avatar) => {
+            return <Avatar key={avatar.src} pic={avatar.src}
+                           isSelected={avatar.id === this.state.currentId}
+                           isSpinning={avatar.id === this.state.spinnerId}
+                           onClick={() => this.clickSelect(avatar.id)}/>;
+        });
+        let picker = (
+            <div className={pickerClasses.join(' ')}>
+                <div className="centeredBoxes" style={{color:"white"}}>
+                    Choose your avatar
+                </div>
+                <div className="wrappedBoxes">
+                {avatars}
+                </div>
+            </div>
+        );
+
         return (
             <div>
                 <div className="centeredBoxes">
