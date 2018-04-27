@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Avatar(props) {
     // console.log("Avatar", props);
@@ -13,10 +14,17 @@ function Avatar(props) {
     let avatarStyle = {"backgroundImage": 'url(' + props.pic + ')'};
     return (
         <div className="avatarCell" onClick={props.onClick}>
-            // TODO: add another div behind pic, for a proper spinner
             <div className={classes.join(' ')} style={avatarStyle}></div>
         </div>
     );
 }
+
+Avatar.propTypes = {
+    pic: PropTypes.string.isRequired,
+    isActive: PropTypes.bool,
+    isSelected: PropTypes.bool,
+    isSpinning: PropTypes.bool,
+    onClick: PropTypes.func,
+};
 
 export default Avatar;

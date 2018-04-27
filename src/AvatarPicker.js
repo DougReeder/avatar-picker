@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Avatar from './Avatar';
 
 function fakeFetch(url) {
@@ -91,5 +92,10 @@ class AvatarPicker extends Component {
         );
     }
 }
+
+AvatarPicker.propTypes = {
+    initialId: PropTypes.number.isRequired,
+    avatars: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default AvatarPicker;
